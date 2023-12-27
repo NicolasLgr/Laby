@@ -15,13 +15,12 @@ public class CountDownTimer : MonoBehaviour
     void Start()
     {
         stopTimer = false;
-        
+        var nowTime = DateTime.Now;
     }
 
     private void Update()
     {
-        float time = gameTime - Time.time;
-
+        float time = gameTime - DateTime.Now.ToTi;
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time - minutes * 60);
 
