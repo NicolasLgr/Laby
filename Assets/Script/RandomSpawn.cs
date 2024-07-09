@@ -12,26 +12,40 @@ public class RandomSpawn : MonoBehaviour
 
     public bool isSpawn = false;
 
-    public float interval;
+    [SerializeField]
+    private GameObject uiDoorSpawn;
+
+    [SerializeField]
+    private int howManySecondVisibleText;
+
+    public float timeBeforeSpawning;
     // Start is called before the first frame update
     void Start()
     {
-        
+        howManySecondVisibleText = 3;
     }
 
     // Update is called once per frame
     void Update()
     {
         //Instantiate(door, location);
-        if (interval > 0)
+        if (timeBeforeSpawning > 0)
         {
-            interval -= Time.deltaTime;
+            timeBeforeSpawning -= Time.deltaTime;
         }
-        if (!isSpawn && interval < 0.1)
+        if (!isSpawn && timeBeforeSpawning < 0.1)
         {
             location = Positions[Random.Range(0, Positions.Length)];
             Instantiate(door, location);
             isSpawn = true;
+            StartCoroutine(ActivateTextForSeconds(howManySecondVisibleText));
         }
+    }
+
+    public IEnumerator ActivateTextForSeconds(float seconds)
+    {
+        uiDoorSpawn.SetActive(true);
+        yield return new WaitForSeconds(seconds);
+        uiDoorSpawn.SetActive(false);
     }
 }
