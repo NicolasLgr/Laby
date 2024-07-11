@@ -73,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
             //Déplacement vertical
             Vector3 targetVelocity = new Vector2(0, _verticalMovement);
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
+            isJumping = false;
             
         }
         
